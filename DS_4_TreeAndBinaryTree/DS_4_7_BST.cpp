@@ -15,7 +15,7 @@ typedef struct BSTNode {
 
 /**实现模块**/
 //查找
-//在二叉排序书中查找值为key的结点
+//在二叉排序书中查找值为key的结点 非递归
 BSTNode *BST_Search(BSTree T, int key) {
     while (T != NULL && key != T->key) {    //若数空或等于根结点的值，则结束循环
         if (key < T->key)
@@ -35,7 +35,15 @@ BSTNode *BSTSearch(BSTree T, int key) {
         return BSTSearch(T->lchild, key);//在左子树中查找
     else return BSTSearch(T->rchild, key);//在右子树中查找
 }
-
+BSTNode *BSTSearch2(BSTree T,int key){
+    while (T!=NULL&&key!=T->key){
+        if (key<T->key)
+            T=T->lchild;
+        else
+            T=T->rchild;
+    }
+    return T;
+}
 //插入
 //在二叉排序树插入关键字为k的新结点（递归实现）
 int BSTInsert(BSTree &T, int k) {
@@ -52,18 +60,25 @@ int BSTInsert(BSTree &T, int k) {
 }
 
 //按照 str[] 中的关键字序列建立二叉排序树
-void Creat_BST(BSTree &T,int str[],int n){
-    T=NULL;//初始化为空
-    int i=0;
-    while(i<n){ //依次将每个关键字插入到二叉排序树中
-        BSTInsert(T,str[i]);
+void Creat_BST(BSTree &T, int str[], int n) {
+    T = NULL;//初始化为空
+    int i = 0;
+    while (i < n) { //依次将每个关键字插入到二叉排序树中
+        BSTInsert(T, str[i]);
         i++;
     }
 }
 //不同关键字序列可能得到同款二叉排序树，而可能得到不同款二叉排序树
 
-//
-
+//中序遍历
+void in_order(BSTree T) {
+    BSTree p = T;
+    if (p != NULL) {
+        in_order(p->lchild);
+        printf("%d ", p->key);
+        in_order(p->rchild);
+    }
+}
 /**实现模块**/
 
 
@@ -71,9 +86,18 @@ void Creat_BST(BSTree &T,int str[],int n){
 
 void testModule() {
     printf("开始测试!\n");
-
-    //坐等填坑
-
+    int str[] = {1, 2, 3, 4, 5, 6, 7};
+    int n = 7;
+    BSTree T;
+    printf("构造二叉排序树 1,2,3,4,5,6,7\n");
+    Creat_BST(T, str, n);//构造二叉排序树
+    printf("中序遍历开始\n");
+    in_order(T);//中序遍历
+    printf("\n中序遍历结束\n");
+    printf("递归查找\n");
+    BSTSearch(T, 5);
+    printf("非递归查找\n");
+    BSTSearch2(T, 5);
     printf("结束测试!\n");
 }
 
