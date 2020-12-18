@@ -8,25 +8,34 @@
 /**定义模块**/
 
 #define MaxVertexNum 100
+//邻接矩阵
+typedef char VertexType;
+typedef int EdgeType;
+typedef struct {
+    VertexType Vex[MaxVertexNum];
+    EdgeType Edge[MaxVertexNum][MaxVertexNum];
+    int vexnum, arcnum;
+} MGraph;
+
 
 //"边"/"弧"
-typedef struct ArcNode{
-    int  adjvex;    //边/弧指向哪个结点
+typedef struct ArcNode {
+    int adjvex;    //边/弧指向哪个结点
     struct ArcNode *next; //指向下一条弧的指针
     //InfoType info;  //边权值
-}ArcNode;
+} ArcNode;
 
 //"顶点"
-typedef struct VNode{
+typedef struct VNode {
     int data; //顶点信息，数据类型不定，int只是一个例子
     ArcNode *first;//第一条边/弧
-}VNode ,AdjList[MaxVertexNum];
+} VNode, AdjList[MaxVertexNum];
 
 //用邻接表存储的图
 typedef struct {
     AdjList vertices;
-    int vexnum,arcnum;
-}ALGraph;
+    int vexnum, arcnum;
+} ALGraph;
 
 /**定义模块**/
 

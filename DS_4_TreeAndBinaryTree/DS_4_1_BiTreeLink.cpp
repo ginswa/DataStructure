@@ -8,9 +8,7 @@
 #include <stdlib.h>
 
 /***定义模块*/
-struct ElemType {
-    int value;
-};
+typedef int ElemType ;
 
 typedef struct BiTNode {
     ElemType data;//数据域
@@ -20,25 +18,26 @@ typedef struct BiTNode {
 
 /**实现模块**/
 //初始化
-void InitTree(BiTree root) {
-    root = (BiTree) malloc(sizeof(BiTNode));
-    root->data = {1};
+struct BiTNode *InitTree(ElemType value) {
+    BiTNode *root = (BiTree) malloc(sizeof(BiTNode));
+    root->data = value;
     root->lchild = NULL;
     root->rchild = NULL;
+    return root;
 }
 
 //插入新结点
-bool InsertNode(BiTree T, ElemType val) {
-    BiTNode *p = (BiTNode *) malloc(sizeof(BiTNode));
-    p->data = val;
-    p->lchild = NULL;
-    p->rchild = NULL;
-    T->lchild = p;//作为左孩子
+struct BiTNode *InsertNode( BiTNode *T, ElemType val) {
+    if (T==NULL) {
+        return InitTree(val);
+    }else if (val==T->data){
+
+    }
 }
 
 //访问函数
 void visit(BiTree T) {
-    printf("%d", T->data.value);
+    printf("%d", T->data);
 }
 
 //先序遍历
@@ -129,11 +128,20 @@ void levelOrder(BiTree T) {
 /**实现模块**/
 
 /**测试模块**/
+void testModule() {
+    BiTree T;
+//    InitTree(T);
+//    ElemType str[] = {2, 3, 4};
+//    for (int i = 0; i < 2; ++i) {
+//        InsertNode(T, str[i]);
+//    }
+    PreOder(T);
+}
 
 
 /**测试模块**/
 
 int main() {
-
+    testModule();
     return 0;
 }
